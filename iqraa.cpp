@@ -426,8 +426,7 @@ public:
     /* Author's Data Routine */
     int author(const std::string &seed)
     {
-
-        const std::string filePathHTML = temp_Dir + "/" + "author.html";
+        const std::string filePathHTML = "author.html";
         Iqraa::retrievePage(seed, filePathHTML);
         std::ifstream ifs(filePathHTML);
         if (!ifs.is_open())
@@ -440,7 +439,7 @@ public:
         html::parser p;
         html::node_ptr n = p.parse(page);
         html::node_ptr authorData = n->select("d");
-        const std::string filePathJSON = temp_Dir + "/" + Iqraa::clearStr((n->select("h1[class='authorName']")->to_text()), "\"", "'", "\n", "") + ".json";
+        const std::string filePathJSON = Iqraa::clearStr((n->select("h1[class='authorName']")->to_text()), "\"", "'", "\n", "") + ".json";
         std::fstream outJson;
         outJson.open(filePathJSON, std::ios_base::out);
         if (!outJson.is_open())
